@@ -9,16 +9,16 @@ s3_client = aws_console.client('s3')
 lambda_client = aws_console.client('lambda')
 iam_console = aws_console.client('iam')
 
-# res1 = IamRole.iamrolecreate('S3LambdaFullAccess3', 581131017022)
-# print(res1)
-# print("IAM Role Created!!")
-#
+res1 = IamRole.iamrolecreate('S3LambdaFullAccess3', 581131017022)
+print(res1)
+print("IAM Role Created!!")
+
 res2 = s3Bucket.sources3bucket('tech-input-bucket', 'ap-south-1')
 print(res2)
 print("Source Bucket Created")
-# res3 = s3Bucket.destinationS3Bucket('tech-output-bucket', 'ap-south-1')
-# print(res3)
-# print("Destination Bucket Created")
+res3 = s3Bucket.destinationS3Bucket('tech-output-bucket', 'ap-south-1')
+print(res3)
+print("Destination Bucket Created")
 
 waiter = s3_client.get_waiter('bucket_exists')
 waiter.wait(Bucket='tech-input-bucket')
