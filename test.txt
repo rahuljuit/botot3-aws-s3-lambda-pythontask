@@ -1,0 +1,51 @@
+What is Scripting language?
+-> Scripting language is the one which allows communication with the already existing application.
+
+What is Programming language?
+Unlike Scripting language, programming Language allows us to write or build up application from the scratch.
+
+Javascript code is embedded into the HTML web page.
+Browsers are responsible to interpret scripting language.
+
+Why Javascript?
+-> it makes HTML that gets rendered on the browser, dynamic and interactive.
+
+How??
+-> 1.Allows modification or manipulation of the content of HTML elements or attributes.
+-> 2.Allows modification or addition of CSS for any HTML element.
+-> 3.Enables validation for Input controls in HTML forms.
+-> 4.Easier to code and understand compared to full-fledged programming languages.
+
+Javascript features:-
+An interpreted language
+Embedded within HTML
+Minimal Syntax-Easy to learn
+Supports quick development
+Good Performance.
+Designed for programming user events.
+Platform Independence/ Architecture Neutral.
+
+Javascript- An Action Oriented Language
+What is an action for javascript?
+-> Two Types of actions are there :-
+1.User Interaction with HTML elements rendered on the browser.
+examples-
+Click on Hyperlink
+Click on button
+Entry of data using input controls
+selection of one of many given options
+
+2.Browser Activities
+example- HTML web page loading
+
+These actions are called as EVENTS in Javascript.
+
+
+How is javascript action-oriented?
+Javascript Execution - is REACTION to actions on web page.
+either to user interactions or Browser activities.
+
+Conclusion-
+User/Browsers actions are termed as Events In Javascript.
+Javascript Execution is Response to these Events.
+Thus, we call Javascript as Action-Oriented Lanuage.

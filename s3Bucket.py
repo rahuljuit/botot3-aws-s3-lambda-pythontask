@@ -40,9 +40,3 @@ def uploadZipFiles(bucket1):
             s3_client.upload_file(file, upload_to_bucket, upload_to_bucket_dir)
 
 
-# res2 = sources3bucket('tech-input-bucket', 'ap-south-1')
-# print(res2)
-# print("Source Bucket Created")
-# res3 = destinationS3Bucket('tech-output-bucket', 'ap-south-1')
-# print(res3)
-# print("Destination Bucket Created")

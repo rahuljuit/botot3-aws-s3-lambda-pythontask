@@ -1,5 +1,4 @@
 import boto3
-import os
 import json
 from botocore.exceptions import ClientError
 
@@ -99,6 +98,3 @@ def iamrolecreate(role_name, account_id):
 
 
 
-# res1 = iamrolecreate('S3LambdaFullAccess3', 581131017022)
-# print(res1)
-# print("IAM Role Created!!")
