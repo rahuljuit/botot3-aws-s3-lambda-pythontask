@@ -63,6 +63,4 @@ def bucketConfiguration(loc, bucket1, account_id, funcName):
 
 # res6 = bucketConfiguration('ap-south-1','tech-input-bucket' , 581131017022, 'my-s3-lambda-func')
 # print(res6)
-# print("Bucket Notification Configuration Added")
-# access key id- AKIAYOTQ3TM7JINJODZY
-# secret access key- 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
+# print("Bucket Notification Configuration Added"
