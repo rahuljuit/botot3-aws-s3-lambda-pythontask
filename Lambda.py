@@ -1,9 +1,11 @@
-import boto3
 
-aws_console = boto3.session.Session(profile_name="test-user")
-s3_client = aws_console.client('s3')
-lambda_client = aws_console.client('lambda')
-iam_console = aws_console.client('iam')
+from classes import boto3_clients
+
+obj2 = boto3_clients()
+aws_console = obj2.aws_client()
+s3_client = obj2.s3_client()
+lambda_client = obj2.lambda_client()
+
 
 
 def createLambdaFunction(bucket1, funcName, account_id, role_name):

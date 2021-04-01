@@ -1,9 +1,10 @@
-import boto3
+from classes import boto3_clients
 
-aws_console = boto3.session.Session(profile_name="test-user")
-s3_client = aws_console.client('s3')
-lambda_client = aws_console.client('lambda')
-iam_console = aws_console.client('iam')
+obj4 = boto3_clients()
+
+aws_console = obj4.aws_client()
+s3_client = obj4.s3_client()
+
 
 def putObjectInS3Bucket(filename, bucket1):
     f = open(filename, "r")

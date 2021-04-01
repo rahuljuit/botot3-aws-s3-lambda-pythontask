@@ -1,10 +1,10 @@
-import boto3
 import os
+from classes import boto3_clients
 
-aws_console = boto3.session.Session(profile_name="test-user")
-s3_client = aws_console.client('s3')
-lambda_client = aws_console.client('lambda')
-iam_console = aws_console.client('iam')
+obj3 = boto3_clients()
+aws_console = obj3.aws_client()
+s3_client = obj3.s3_client()
+
 
 
 def sources3bucket(bucket1, loc):

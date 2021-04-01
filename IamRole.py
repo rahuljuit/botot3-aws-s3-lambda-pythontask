@@ -1,11 +1,11 @@
-import boto3
 import json
 from botocore.exceptions import ClientError
+from classes import boto3_clients
 
-aws_console = boto3.session.Session(profile_name="test-user")
-s3_client = aws_console.client('s3')
-lambda_client = aws_console.client('lambda')
-iam_console = aws_console.client('iam')
+obj1 = boto3_clients()
+
+aws_console = obj1.aws_client()
+iam_console = obj1.iam_client()
 
 trust_relationship_policy_another_aws_service = {
   "Version": "2012-10-17",
@@ -20,9 +20,10 @@ trust_relationship_policy_another_aws_service = {
   ]
 }
 
+
 def iamrolecreate(role_name, account_id):
-    try:
-        create_role_res = iam_console.create_role(
+    # try:
+    create_role_res = iam_console.create_role(
             RoleName=role_name,
             AssumeRolePolicyDocument=json.dumps(trust_relationship_policy_another_aws_service),
             Description='This is a test role',
@@ -32,19 +33,21 @@ def iamrolecreate(role_name, account_id):
                     'Value': 'CreateRole'
                 }
             ]
-        )
-    except ClientError as error:
-        if error.response['Error']['Code'] == 'EntityAlreadyExists':
-            return 'Role already exists... hence exiting from here'
-        else:
-            return 'Unexpected error occurred... Role could not be created', error
+    )
+    # except ClientError as error:
+    #     if error.response['Error']['Code'] == 'EntityAlreadyExists':
+    #         return 'Role already exists... hence exiting from here'
+    #     else:
+    #         return 'Unexpected error occurred... Role could not be created', error
 
     policy_json = {
         "Version": "2012-10-17",
         "Statement": [{
             "Effect": "Allow",
             "Action": [
-                "s3:*"
+                   "s3:*"
+                # "s3:PutObject",
+                # "s3:Get*"
             ],
             "Resource": "*"
         },
@@ -55,8 +58,16 @@ def iamrolecreate(role_name, account_id):
                     "logs:CreateLogStream",
                     "logs:PutLogEvents"
                 ],
-                "Resource": "*"
-            }]
+                "Resource":"*"
+         },
+            # {
+            #     "Effect": "Allow",
+            #     "Action": [
+            #         "lambda:InvokeFunction"
+            #     ],
+            #     "Resource": "*"
+            # }
+        ]
     }
 
     policy_name = role_name + '_policy'
@@ -77,22 +88,16 @@ def iamrolecreate(role_name, account_id):
         else:
 
             print('Unexpected error occurred... hence cleaning up', error)
-            iam_console.delete_role(
-                RoleName=role_name
+            iam_console.delete_policy(
+                PolicyArn=policy_arn
             )
-            return 'Role could not be created...', error
+            return 'Policy could not be created...', error
 
-    try:
-        policy_attach_res = iam_console.attach_role_policy(
+
+    policy_attach_res = iam_console.attach_role_policy(
             RoleName=role_name,
             PolicyArn=policy_arn
-        )
-    except ClientError as error:
-        print('Unexpected error occurred... hence cleaning up')
-        iam_console.delete_role(
-            RoleName=role_name
-        )
-        return 'Role could not be created...', error
+    )
 
     return 'Role {0} successfully got created'.format(role_name)
 
