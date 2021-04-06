@@ -1,17 +1,13 @@
+from myClass import obj1
 
-from classes import boto3_clients
-
-obj2 = boto3_clients()
-aws_console = obj2.aws_client()
-s3_client = obj2.s3_client()
-lambda_client = obj2.lambda_client()
+s3_client = obj1.s3_client
+lambda_client = obj1.lambda_client
 
 
-
-def createLambdaFunction(bucket1, funcName, account_id, role_name):
+def create_lambda_function(bucket1, func_name, account_id, role_name):
 
     response = lambda_client.create_function(
-        FunctionName=funcName,
+        FunctionName=func_name,
         Runtime='python3.7',
         Role='arn:aws:iam::' + str(account_id) + ':role/' + role_name,
         Handler='lambda_function.lambda_handler',
@@ -28,10 +24,10 @@ def createLambdaFunction(bucket1, funcName, account_id, role_name):
 # print(res4)
 # print("lambda Function Created")
 
-def addPermissionToLambda( funcName, account_id, bucket1):
+def add_permission_to_lambda(func_name, account_id, bucket1):
     response = lambda_client.add_permission(
         Action='lambda:InvokeFunction',
-        FunctionName=funcName,
+        FunctionName=func_name,
         Principal='s3.amazonaws.com',
         SourceAccount=str(account_id),
         SourceArn='arn:aws:s3:::' + bucket1,
@@ -44,13 +40,13 @@ def addPermissionToLambda( funcName, account_id, bucket1):
 # print("Lambda functions Permission Added")
 
 
-def bucketConfiguration(loc, bucket1, account_id, funcName):
+def bucket_configuration(loc, bucket1, account_id, func_name):
     response1 = s3_client.put_bucket_notification_configuration(
         Bucket=bucket1,
         NotificationConfiguration={
             'LambdaFunctionConfigurations': [
                 {
-                    'LambdaFunctionArn': 'arn:aws:lambda:' + loc + ':' + str(account_id) + ':function:' + funcName,
+                    'LambdaFunctionArn': 'arn:aws:lambda:' + loc + ':' + str(account_id) + ':function:' + func_name,
                     'Events': [
                         's3:ObjectCreated:Put'
                     ],
@@ -59,8 +55,3 @@ def bucketConfiguration(loc, bucket1, account_id, funcName):
         },
     )
     return response1
-
-
-# res6 = bucketConfiguration('ap-south-1','tech-input-bucket' , 581131017022, 'my-s3-lambda-func')
-# print(res6)
-# print("Bucket Notification Configuration Added"

@@ -1,12 +1,9 @@
-from classes import boto3_clients
+from myClass import obj1
 
-obj4 = boto3_clients()
-
-aws_console = obj4.aws_client()
-s3_client = obj4.s3_client()
+s3_client = obj1.s3_client
 
 
-def putObjectInS3Bucket(filename, bucket1):
+def put_object_in_s3_bucket(filename, bucket1):
     f = open(filename, "r")
     data = f.read()
     print(data)
@@ -18,8 +15,3 @@ def putObjectInS3Bucket(filename, bucket1):
         Key=filename,
     )
     return response3
-
-
-# res7 = putObjectInS3Bucket('test.txt', 'tech-input-bucket')
-# print(res7)
-# print("Object added to the source bucket")
