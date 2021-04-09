@@ -1,6 +1,7 @@
 import boto3
 
-class boto3_clients:
+
+class Boto3Clients:
 
     def __init__(self):
         self.sessionn = boto3.session.Session(profile_name='test-user')
@@ -9,4 +10,4 @@ class boto3_clients:
         self.iam_client = self.sessionn.client('iam')
 
 
-obj1 = boto3_clients()
+obj1 = Boto3Clients()
